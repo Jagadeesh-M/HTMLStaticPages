@@ -52,7 +52,8 @@
          }
          
          // Start the game and timer
-         function startGame (event) { event.preventDefault();
+         function startGame(event) { 
+	 event.preventDefault();
          document.getElementById('start').disabled = true; 
          document.getElementById('submit').disabled = false;
          document.getElementById('result').disabled = false;
@@ -65,7 +66,7 @@
          // End the game and display the final score
          function endGame() {
          clearInterval(timer);
-         document.getElementById('question').innerText 'Game Over! Final Score: + score;
+         document.getElementById('question').innerText = 'Game Over! Final Score: ' + score;
          document.getElementById('result').disabled = true; 
          document.getElementById('submit').disabled = true;
          document.getElementById('start').disabled = false;
@@ -85,7 +86,7 @@
          endGame();
          }
          else {
-         document.getElementById('timer').innerText = 'Time Left: timeLeft + 's';
+         document.getElementById('timer').innerText = 'Time Left: ' + timeLeft + 's';
          if (timeLeft <= 25 && timeLeft > 10) {
          document.getElementById('timer').style.color = 'orange'; document.getElementById('timer').style.fontweight = 'bold';
          } else if (timeLeft <= 10) {
