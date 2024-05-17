@@ -2,7 +2,7 @@
 <html>
    <head>
       <title>Multiplication Game</title>
-      <link rel="stylesheet" href="https://s...content-available-to-author-only...n.com/bootstrap/4.5.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://stackpath.boostrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
       <style>
          body {
          display: flex;
@@ -20,128 +20,84 @@
       <div class="container">
          <h1>Multiplication Game</h1>
          <div id="question"></div>
-         <input type="text" id="result" class="form-control mb-2" style="font-size: 2rem;" onkeyup="handleKeyUp (event)" />
+         <input type="text" id="result" class="form-control mb-2" style="font-size: 2rem;" onkeyup="handleKeyUp(event)" />
          <button id="submit" class="btn btn-primary btn-lg mb-2" onclick="checkAnswer()">Submit</button>
-         <button id="start" class="btn btn-primary btn-lg mb-2" onclick="startGame (event)">Start</button>
+         <button id="start" class="btn btn-primary btn-lg mb-2" onclick="startGame(event)">Start</button>
          <div id="score" class="mt-2" style="font-size: 2rem; "></div>
          <div id="timer" class="mt-2" style="font-size: 2rem;"></div>
       </div>
       <script>
          var score = 0;
-         
          var num1, num2;
-         
          var timeLeft = 60;
-         
          var timer;
          
          // Generate a random multiplication question
-         
          function generateQuestion() {
-         
          num1 = 12;
-         
          num2 = Math.floor(Math.random() * 10) + 1;
-         
          document.getElementById('question').innerText = num1 + "x" + num2 + " = ?";
-         
-         document.getElementById('result').value = ''; document.getElementById('result').focus();
-         
+         document.getElementById('result').value = ''; 
+         document.getElementById('result').focus();
          document.getElementById('score').innerText = 'Score: ' + score;
-         
          }
          
          // Check the user's answer and update the score
-         
          function checkAnswer() {
-         
          var userAnswer = parseInt(document.getElementById('result').value);
-         
          if (userAnswer == num1 * num2) {
-         
          score++;
-         
          }
-         
          generateQuestion();
-         
          }
          
          // Start the game and timer
-         
          function startGame (event) { event.preventDefault();
-         
-         document.getElementById('start').disabled = true; document.getElementById('submit').disabled = false;
-         
+         document.getElementById('start').disabled = true; 
+         document.getElementById('submit').disabled = false;
          document.getElementById('result').disabled = false;
-         
          score = 0;
-         
          timeLeft = 60;
-         
          timer = setInterval(countdown, 1000);
-         
          generateQuestion();
-         
          }
          
          // End the game and display the final score
-         
          function endGame() {
-         
          clearInterval(timer);
-         
          document.getElementById('question').innerText 'Game Over! Final Score: + score;
-         
-         document.getElementById('result').disabled = true; document.getElementById('submit').disabled = true;
-         
+         document.getElementById('result').disabled = true; 
+         document.getElementById('submit').disabled = true;
          document.getElementById('start').disabled = false;
-         
          document.getElementById('score').innerText = '';
-         
          document.getElementById('timer').innerText = '';
-         
          }
-         
-         function handleKeyUp(event) { if (event.keyCode === 13) {
-         
-         checkAnswer();
-         
-         }
-         
+      
+         function handleKeyUp(event) { 
+            if (event.keyCode === 13) {   
+               checkAnswer();
+            }
          }
          
          // Timer countdown
-         
          function countdown() {
-         
          if (timeLeft < 0) {
-         
          endGame();
          }
          else {
-         
          document.getElementById('timer').innerText = 'Time Left: timeLeft + 's';
-         
          if (timeLeft <= 25 && timeLeft > 10) {
-         
          document.getElementById('timer').style.color = 'orange'; document.getElementById('timer').style.fontweight = 'bold';
-         
          } else if (timeLeft <= 10) {
-         
          document.getElementById('timer').style.color = 'red';
-         
          document.getElementById('timer').style.fontWeight = 'bold';
-         
          } else {
-         
          document.getElementById('timer').style.color = 'initial';
-        document.getElementById('timer').style.fontWeight = 'normal';
+         document.getElementById('timer').style.fontWeight = 'normal';
          }
          }
          timeLeft--;
         }
       </script>
-    
    </body>
 </html>
