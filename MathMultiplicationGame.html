@@ -14,11 +14,23 @@
          .container {
          text-align: center;
          }
+
+          /* Style for the dropdown */
+         #numberSelect {
+            font-size: 30px; /* Change the font size */
+            padding: 10px; /* Add padding */
+            width: 80px; /* Set a specific width */
+            height: 80px; /* Set a specific height */
+         }
       </style>
    </head>
    <body>
       <div class="container">
          <h1>Multiplication Game</h1>
+         <select id="numberSelect">
+            <!-- Generating options for numbers from 1 to 20 using JavaScript -->
+            <!-- You can adjust the numbers here if you want to display a different range -->
+          </select>
          <div id="question"></div>
          <input type="text" id="result" class="form-control mb-2" style="font-size: 2rem;" onkeyup="handleKeyUp(event)" />
          <button id="submit" class="btn btn-primary btn-lg mb-2" onclick="checkAnswer()">Submit</button>
@@ -31,10 +43,21 @@
          var num1, num2;
          var timeLeft = 60;
          var timer;
-         
+         var selectedNumber;
+
+         // JavaScript to generate options for numbers from 1 to 20
+         // and add them to the dropdown menu
+         var select = document.getElementById("numberSelect");
+         for (var i = 1; i <= 20; i++) {
+            var option = document.createElement("option");
+            option.text = i;
+            option.value = i;
+            select.appendChild(option);
+         }
+
          // Generate a random multiplication question
          function generateQuestion() {
-         num1 = 12;
+         num1 = selectedNumber;
          num2 = Math.floor(Math.random() * 10) + 1;
          document.getElementById('question').innerText = num1 + "x" + num2 + " = ?";
          document.getElementById('result').value = ''; 
@@ -53,14 +76,22 @@
          
          // Start the game and timer
          function startGame(event) { 
-	 event.preventDefault();
+	      event.preventDefault();
          document.getElementById('start').disabled = true; 
          document.getElementById('submit').disabled = false;
          document.getElementById('result').disabled = false;
+         document.getElementById('numberSelect').disabled = true;
+
+         var e = document.getElementById("numberSelect");
+         var value = e.options[e.selectedIndex].value;
+         var text = e.options[e.selectedIndex].text;
+
+         selectedNumber = text;
          score = 0;
          timeLeft = 60;
          timer = setInterval(countdown, 1000);
-         generateQuestion();
+         
+         generateQuestion(selectedNumber);
          }
          
          // End the game and display the final score
